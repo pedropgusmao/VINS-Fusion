@@ -42,6 +42,7 @@ std::string FISHEYE_MASK;
 std::vector<std::string> CAM_NAMES;
 int MAX_CNT;
 int MIN_DIST;
+int FISHEYE;
 double F_THRESHOLD;
 int SHOW_TRACK;
 int FLOW_BACK;
@@ -86,6 +87,12 @@ void readParameters(std::string config_file)
     F_THRESHOLD = fsSettings["F_threshold"];
     SHOW_TRACK = fsSettings["show_track"];
     FLOW_BACK = fsSettings["flow_back"];
+
+    FISHEYE = fsSettings["fisheye"];
+    std::string VINS_FOLDER_PATH = "/home/pedro/catkin_ws/src/VINS-Fusion/";
+    if (FISHEYE == 1)
+      FISHEYE_MASK = VINS_FOLDER_PATH + "config/fisheye_mask.jpg";
+
 
     MULTIPLE_THREAD = fsSettings["multiple_thread"];
 

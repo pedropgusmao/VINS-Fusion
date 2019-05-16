@@ -50,11 +50,18 @@ FeatureTracker::FeatureTracker()
     stereo_cam = 0;
     n_id = 0;
     hasPrediction = false;
+
+    if(FISHEYE)
+      fisheye_mask = cv::imread(FISHEYE_MASK, 0);
+
 }
 
 void FeatureTracker::setMask()
 {
-    mask = cv::Mat(row, col, CV_8UC1, cv::Scalar(255));
+    if(FISHEYE)
+        mask = fisheye_mask.clone();
+    else
+    	mask = cv::Mat(row, col, CV_8UC1, cv::Scalar(255));
 
     // prefer to keep features that are tracked for long time
     vector<pair<int, pair<cv::Point2f, int>>> cnt_pts_id;
